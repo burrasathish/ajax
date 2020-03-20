@@ -1,0 +1,115 @@
+<!Doctype html>
+<html>
+
+<head>
+    <title>
+        Contact
+    </title>
+    <link href="css/ContactStyle.css" rel="stylesheet" type="text/css">
+
+<body>
+    <div>
+    <!-- <%@include file="Header.jsp"%> -->
+    </div>
+<script>
+    function Details(event) {
+     event.preventDefault();
+        const firstname = document.getElementById("firstname").value;
+       const lastname = document.getElementById("lastname").value;
+        // console.log(lname);
+        const phone = document.getElementById("phone").value;
+        const email= document.getElementById("email").value;
+        const message = document.getElementById("message").value;
+        let data = { "firstname" : firstname,
+                      "lastname" : lastname,
+                      "phone" : phone,
+                      "mail" :email,
+                     "message" :message
+         };
+fetch('jsonformat', {
+  method: 'POST', // or 'PUT'
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(data),
+})
+.then((response) => response.json())
+.then((data) => {
+  console.log('Success:', data);
+})
+.catch((error) => {
+  console.error('Error:', error);
+});
+      
+    }
+</script>
+
+    <h1 id="title">Contact Us</h1>
+    <div id="form-outer">
+        <p style="color:brown"></p>
+        <form onsubmit="Details(event)">
+            <div class="rowTab">
+
+                <div class="labels">
+                    <label id="name-label" for="name">* FirstName: </label>
+                </div>
+
+                <div class="rightTab">
+                    <input autofocus type="text" id="firstname" name="firstname" class="input-field" placeholder="enter Your name"
+                        required>
+                </div>
+                <div style="color:red" id="valid"></div>
+            </div>
+
+            <div class="rowTab">
+                <div class="labels">
+                    <label id="name-label" for="name">* LastName: </label>
+                </div>
+                <div class="rightTab">
+                    <input autofocus type="text" name="lastname" id="lastname" class="input-field"
+                        placeholder="enter Your name" required>
+                </div>
+                <div style="color:red" id="valid"></div>
+            </div>
+
+            <div class="rowTab">
+                <div class="labels">
+                    <label for="phone">* phone: </label>
+                </div>
+                <div class="rightTab">
+                    <input type="phone" name="phone" id="phone" class="input-field" required
+                        placeholder="Enter your phone">
+                </div>
+            </div>
+
+
+            <div class="rowTab">
+                <div class="labels">
+                    <label id="email-label" for="email">* Email: </label>
+                </div>
+                <div class="rightTab">
+                    <input type="email" name="email" id="email" class="input-field" required
+                        placeholder="Enter your Email">
+                </div>
+            </div>
+
+            <div class="rowTab">
+                <div class="labels">
+                    <label for="message">* Message: </label>
+                </div>
+                <div class="rightTab">
+                    <input type="text" name="message" id="message" class="input-field" required
+                        placeholder="Enter your Message">
+                </div>
+            </div>
+
+            <button id="submit" type="submit" class="btn btn-success">Submit</button>
+        </form>
+    
+    </div>
+
+    <!-- <%@include file="Footer.jsp"%> -->
+</body>
+</head>
+
+</html>
